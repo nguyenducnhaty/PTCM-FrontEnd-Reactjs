@@ -7,7 +7,7 @@ export default {
   roots: ['<rootDir>'],
   modulePaths: ['<rootDir>/src'],
   moduleNameMapper: {
-    '^@app/(.*)$': '<rootDir>/src/$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
     '.+\\.(png|jpg)$': 'identity-obj-proxy',
   },
   coverageThreshold: {

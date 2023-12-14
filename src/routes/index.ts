@@ -6,6 +6,7 @@ import { ROUTES } from '@/constants';
 
 // HOCs
 import { withLazy } from '@/hocs';
+import { MainLayout } from '@/layouts';
 
 // Pages
 const Login = lazy(() => import('@/pages/Login'));
@@ -14,7 +15,7 @@ const Dashboard = lazy(() => import('@/pages/Home'));
 export const ROUTER = createBrowserRouter([
   {
     path: ROUTES.ROOT,
-    // Component: withCheckLogin(MainLayout),
+    Component: MainLayout,
     children: [
       {
         index: true,

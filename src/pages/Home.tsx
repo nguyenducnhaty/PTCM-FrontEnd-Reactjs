@@ -1,4 +1,4 @@
-import { ProfileForm } from '@/components/ProfileForm';
+import { PlantingDiaryForm } from '@/components/PlantingDiaryForm';
 import { Separator } from '@/components/ui/separator';
 
 const Home = () => {
@@ -11,7 +11,7 @@ const Home = () => {
         </p>
       </div>
       <Separator />
-      <ProfileForm />
+      <PlantingDiaryForm />
     </div>
   );
 };

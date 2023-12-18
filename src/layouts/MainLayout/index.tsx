@@ -1,12 +1,17 @@
+import { Outlet } from 'react-router-dom';
 import Lazy from '@/components/Lazy';
 import { Separator } from '@/components/ui/separator';
-import { Outlet } from 'react-router-dom';
 import { SidebarNav } from '../sidebar-nav';
+import { ROUTES } from '@/constants';
 
 const sidebarNavItems = [
   {
     title: 'Nhật kí cấy',
-    href: '/examples/forms',
+    href: ROUTES.ROOT,
+  },
+  {
+    title: 'Soi câu',
+    href: ROUTES.TreeScreening,
   },
 ];
 

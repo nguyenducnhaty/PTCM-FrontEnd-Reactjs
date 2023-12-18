@@ -11,6 +11,7 @@ import { MainLayout } from '@/layouts';
 // Pages
 const Login = lazy(() => import('@/pages/Login'));
 const Dashboard = lazy(() => import('@/pages/Home'));
+const TreeScreening = lazy(() => import('@/pages/TreeScreening'));
 
 export const ROUTER = createBrowserRouter([
   {
@@ -21,30 +22,10 @@ export const ROUTER = createBrowserRouter([
         index: true,
         Component: Dashboard,
       },
-      //   {
-      //     path: ROUTES.HISTORY,
-      //     Component: History,
-      //   },
-      //   {
-      //     path: ROUTES.MY_WALLET,
-      //     Component: MyWallet,
-      //   },
-      //   {
-      //     path: ROUTES.SETTING,
-      //     Component: Setting,
-      //   },
-      //   {
-      //     path: ROUTES.TRANSACTION,
-      //     Component: Transaction,
-      //   },
-      //   {
-      //     path: ROUTES.USER,
-      //     Component: User,
-      //   },
-      //   {
-      //     path: ROUTES.NOT_FOUND,
-      //     Component: NotFound,
-      // },
+      {
+        path: ROUTES.TreeScreening,
+        Component: TreeScreening,
+      },
     ],
   },
   {

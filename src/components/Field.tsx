@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from './ui/select';
 import { Textarea } from './ui/textarea';
+import { memo } from 'react';
 
 interface Option {
   key: string;
@@ -23,9 +24,7 @@ interface Option {
 }
 
 interface FieldProps {
-  form: {
-    control: Control<FormData>;
-  };
+  form: Control<FormData>;
   description?: string;
   label: string;
   type: 'input' | 'select' | 'textarea'; // Chỉ cho phép 'input' hoặc 'select'
@@ -96,4 +95,4 @@ const Field: React.FC<FieldProps> = ({
   );
 };
 
-export default Field;
+export default memo(Field);

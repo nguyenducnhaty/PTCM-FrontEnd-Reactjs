@@ -9,7 +9,7 @@ import { useToast } from './ui/use-toast';
 import Field from './Field';
 
 const profileFormSchema = z.object({
-  username: z
+  box: z
     .string()
     .min(2, {
       message: 'Username must be at least 2 characters.',
@@ -17,31 +17,35 @@ const profileFormSchema = z.object({
     .max(30, {
       message: 'Username must not be longer than 30 characters.',
     }),
-  email: z
-    .string({
-      required_error: 'Please select an email to display.',
+  treeBase: z
+    .string()
+    .min(2, {
+      message: 'Username must be at least 2 characters.',
     })
-    .email(),
-  bio: z.string().max(160).min(4),
-  urls: z
-    .array(
-      z.object({
-        value: z.string().url({ message: 'Please enter a valid URL.' }),
-      }),
-    )
-    .optional(),
+    .max(30, {
+      message: 'Username must not be longer than 30 characters.',
+    }),
+  MTCode: z.string().max(160).min(4),
+  TMom: z.string().max(160).min(4),
+  CMom: z.string().max(160).min(4),
+  TChild: z.string().max(160).min(4),
+  CChild: z.string().max(160).min(4),
+  hour: z.string().max(160).min(1),
+  minute: z.string().max(160).min(1),
+  note: z
+    .string()
+    .min(2, {
+      message: 'Username must be at least 2 characters.',
+    })
+    .max(30, {
+      message: 'Username must not be longer than 30 characters.',
+    }),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 // This can come from your database or API.
-const defaultValues: Partial<ProfileFormValues> = {
-  bio: '',
-  urls: [
-    { value: 'https://shadcn.com' },
-    { value: 'http://twitter.com/shadcn' },
-  ],
-};
+const defaultValues: Partial<ProfileFormValues> = {};
 
 export function PlantingDiaryForm() {
   const { toast } = useToast();
@@ -50,6 +54,7 @@ export function PlantingDiaryForm() {
     defaultValues,
     mode: 'onChange',
   });
+
   function onSubmit(data: ProfileFormValues) {
     toast({
       title: 'You submitted the following values:',
@@ -82,7 +87,7 @@ export function PlantingDiaryForm() {
           <div className="basis-1/2">
             <Field
               form={form.control}
-              name="username"
+              name="box"
               label={'Box'}
               type={'input'}
               placeholder={'Box'}
@@ -91,7 +96,7 @@ export function PlantingDiaryForm() {
           <div className="basis-1/2">
             <Field
               form={form.control}
-              name="email"
+              name="treeBase"
               label={'Đế cây'}
               type={'select'}
               placeholder={'Đế cây'}
@@ -101,7 +106,7 @@ export function PlantingDiaryForm() {
           <div className="basis-1/4">
             <Field
               form={form.control}
-              name="username"
+              name="MTCode"
               label={'Mã MT'}
               type={'input'}
               placeholder={'Mã MT'}
@@ -111,14 +116,14 @@ export function PlantingDiaryForm() {
         <div className="flex gap-4">
           <Field
             form={form.control}
-            name="username"
+            name="TMom"
             label={'T.Mẹ'}
             type={'input'}
             placeholder={'T.Mẹ'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="CMom"
             label={'C.Mẹ'}
             type={'input'}
             placeholder={'C.Mẹ'}
@@ -127,14 +132,14 @@ export function PlantingDiaryForm() {
         <div className="flex gap-4">
           <Field
             form={form.control}
-            name="username"
+            name="TChild"
             label={'T.Con'}
             type={'input'}
             placeholder={'T.Con'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="CChild"
             label={'C.Con'}
             type={'input'}
             placeholder={'C.Con'}
@@ -143,14 +148,14 @@ export function PlantingDiaryForm() {
         <div className="flex gap-4">
           <Field
             form={form.control}
-            name="username"
+            name="hour"
             label={'Giờ'}
             type={'input'}
             placeholder={'Giờ'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="minute"
             label={'Phút'}
             type={'input'}
             placeholder={'Phút'}
@@ -158,7 +163,7 @@ export function PlantingDiaryForm() {
         </div>
         <Field
           form={form.control}
-          name="username"
+          name="note"
           label={'Ghi chú'}
           type={'textarea'}
           placeholder={'Ghi chú'}

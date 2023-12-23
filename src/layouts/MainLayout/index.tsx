@@ -3,6 +3,7 @@ import Lazy from '@/components/Lazy';
 import { Separator } from '@/components/ui/separator';
 import { SidebarNav } from '../sidebar-nav';
 import { ROUTES } from '@/constants';
+import { Toaster } from '@/components/ui/toaster';
 
 const sidebarNavItems = [
   {
@@ -51,6 +52,7 @@ const Layout = () => {
           </div>
         </div>
       </div>
+      <Toaster />
     </>
   );
 };

@@ -6,7 +6,6 @@ import { CalendarIcon } from '@radix-ui/react-icons';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,9 +18,10 @@ import Field from './Field';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { cn } from '@/lib/utils';
 import { Calendar } from './ui/calendar';
+import apiService from '@/services/ApiService';
 
 const profileFormSchema = z.object({
-  username: z
+  barCode: z
     .string()
     .min(2, {
       message: 'Username must be at least 2 characters.',
@@ -29,21 +29,74 @@ const profileFormSchema = z.object({
     .max(30, {
       message: 'Username must not be longer than 30 characters.',
     }),
-  email: z
-    .string({
-      required_error: 'Please select an email to display.',
-    })
-    .email(),
-  bio: z.string().max(160).min(4),
-  urls: z
-    .array(
-      z.object({
-        value: z.string().url({ message: 'Please enter a valid URL.' }),
-      }),
-    )
-    .optional(),
-  dob: z.date({
+  batchCode: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  transplantationLimit: z.date({
     required_error: 'A date of birth is required.',
+  }),
+  SubculturingDay: z.date({
+    required_error: 'A date of birth is required.',
+  }),
+  breedCode: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  motherRoot: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  treeCode: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  MTCode: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  batchChildCode: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  KHWeek: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  gd: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  transplantGroup: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  seedlings: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  numberOfPockets: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  cleanQuantity: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  cleanInoculation: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  MT_0: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  quantityNLightCleanInoculation: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  implantNMild: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  MT_2: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  quantityNHeavy: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  implantNSevere: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  MT_3: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  note: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
   }),
 });
 
@@ -51,11 +104,11 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {
-  bio: '',
-  urls: [
-    { value: 'https://shadcn.com' },
-    { value: 'http://twitter.com/shadcn' },
-  ],
+  // bio: '',
+  // urls: [
+  //   { value: 'https://shadcn.com' },
+  //   { value: 'http://twitter.com/shadcn' },
+  // ],
 };
 
 export function TreeScreeningForm() {
@@ -65,15 +118,18 @@ export function TreeScreeningForm() {
     defaultValues,
     mode: 'onChange',
   });
-  function onSubmit(data: ProfileFormValues) {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  async function onSubmit(data: ProfileFormValues) {
+    try {
+      await apiService.post('treescreening', data);
+      toast({
+        title: 'You submitted the following values:',
+        description: (
+          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+          </pre>
+        ),
+      });
+    } catch (error) {}
   }
   const mockSelect = [
     {
@@ -97,7 +153,7 @@ export function TreeScreeningForm() {
           <div className="basis-1/2">
             <Field
               form={form.control}
-              name="username"
+              name="barCode"
               label={'Barcode'}
               type={'input'}
               placeholder={'Barcode'}
@@ -106,7 +162,7 @@ export function TreeScreeningForm() {
           <div className="basis-1/2">
             <Field
               form={form.control}
-              name="email"
+              name="batchCode"
               label={'Mã Batch'}
               type={'input'}
               placeholder={'Mã Batch'}
@@ -116,7 +172,7 @@ export function TreeScreeningForm() {
         <div className="flex gap-4">
           <FormField
             control={form.control}
-            name="dob"
+            name="transplantationLimit"
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>Hạn Cấy</FormLabel>
@@ -145,7 +201,7 @@ export function TreeScreeningForm() {
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date) =>
-                        date > new Date() || date < new Date('1900-01-01')
+                        date < new Date() || date < new Date('1900-01-01')
                       }
                       initialFocus
                     />
@@ -157,7 +213,7 @@ export function TreeScreeningForm() {
           />
           <FormField
             control={form.control}
-            name="dob"
+            name="SubculturingDay"
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>Ngày Soi</FormLabel>
@@ -186,7 +242,7 @@ export function TreeScreeningForm() {
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date) =>
-                        date > new Date() || date < new Date('1900-01-01')
+                        date < new Date() || date < new Date('1900-01-01')
                       }
                       initialFocus
                     />
@@ -200,21 +256,21 @@ export function TreeScreeningForm() {
         <div className="flex gap-4">
           <Field
             form={form.control}
-            name="username"
+            name="breedCode"
             label={'Mã Giống'}
             type={'input'}
             placeholder={'Mã Giống'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="motherRoot"
             label={'Gốc Mẹ'}
             type={'input'}
             placeholder={'Gốc Mẹ'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="treeCode"
             label={'Mã Cây'}
             type={'select'}
             placeholder={'Mã Cây'}
@@ -222,7 +278,7 @@ export function TreeScreeningForm() {
           />
           <Field
             form={form.control}
-            name="username"
+            name="MTCode"
             label={'Mã MT'}
             type={'select'}
             placeholder={'Mã MT'}
@@ -232,21 +288,21 @@ export function TreeScreeningForm() {
         <div className="flex gap-4">
           <Field
             form={form.control}
-            name="username"
+            name="batchChildCode"
             label={'Mã Batch Con'}
             type={'input'}
             placeholder={'Mã Batch Con'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="KHWeek"
             label={'Tuần KH'}
             type={'input'}
             placeholder={'Tuần KH'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="gd"
             label={'GĐ'}
             type={'select'}
             placeholder={'GĐ'}
@@ -254,7 +310,7 @@ export function TreeScreeningForm() {
           />
           <Field
             form={form.control}
-            name="username"
+            name="transplantGroup"
             label={'Nhóm Cấy'}
             type={'select'}
             placeholder={'Nhóm Cấy'}
@@ -264,28 +320,28 @@ export function TreeScreeningForm() {
         <div className="flex gap-4">
           <Field
             form={form.control}
-            name="username"
+            name="seedlings"
             label={'C.Con'}
             type={'input'}
             placeholder={'C.Con'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="numberOfPockets"
             label={'SL Túi Soi'}
             type={'input'}
             placeholder={'SL Túi Soi'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="numberOfCancellationBags"
             label={'SL Túi Hủy'}
             type={'input'}
             placeholder={'SL Túi Hủy'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="numberOfExcessBags"
             label={'SL Túi Dư'}
             type={'input'}
             placeholder={'SL Túi Dư'}
@@ -294,21 +350,21 @@ export function TreeScreeningForm() {
         <div className="flex gap-4">
           <Field
             form={form.control}
-            name="username"
+            name="cleanQuantity"
             label={'SL Sạch'}
             type={'input'}
             placeholder={'SL Sạch'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="cleanInoculation"
             label={'Cấy Sạch'}
             type={'input'}
             placeholder={'Cấy Sạch'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="MT_0"
             label={'MT_0'}
             type={'input'}
             placeholder={'MT_0'}
@@ -317,21 +373,21 @@ export function TreeScreeningForm() {
         <div className="flex gap-4">
           <Field
             form={form.control}
-            name="username"
+            name="quantityNLightCleanInoculation"
             label={'SL N Nhẹ'}
             type={'input'}
             placeholder={'SL N Nhẹ'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="implantNMild"
             label={'Cấy N Nhẹ'}
             type={'input'}
             placeholder={'Cấy N Nhẹ'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="MT_2"
             label={'MT_2'}
             type={'input'}
             placeholder={'MT_2'}
@@ -340,29 +396,29 @@ export function TreeScreeningForm() {
         <div className="flex gap-4">
           <Field
             form={form.control}
-            name="username"
+            name="quantityNHeavy"
             label={'SL N Nặng'}
             type={'input'}
             placeholder={'SL N Nặng'}
           />
           <Field
             form={form.control}
-            name="username"
+            name="implantNSevere"
             label={'Cấy N Nặng'}
             type={'input'}
             placeholder={'Cấy N Nặng'}
           />
           <Field
             form={form.control}
-            name="username"
-            label={'MT_0'}
+            name="MT_3"
+            label={'MT_3'}
             type={'input'}
             placeholder={'MT_3'}
           />
         </div>
         <Field
           form={form.control}
-          name="username"
+          name="note"
           label={'Ghi chú'}
           type={'textarea'}
           placeholder={'Ghi chú'}

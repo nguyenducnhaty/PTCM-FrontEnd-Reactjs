@@ -11,8 +11,12 @@ const sidebarNavItems = [
     href: ROUTES.ROOT,
   },
   {
-    title: 'Soi câu',
+    title: 'Soi cây',
     href: ROUTES.TreeScreening,
+  },
+  {
+    title: 'Phát Mô',
+    href: ROUTES.TissueDevelopment,
   },
 ];
 

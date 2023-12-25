@@ -1,4 +1,4 @@
-import { PlantingDiaryForm } from '@/components/PlantingDiaryForm';
+import { PlantingDiaryForm } from '@/pages/PlantingDiary/components/PlantingDiaryForm';
 import { Separator } from '@/components/ui/separator';
 
 const Home = () => {

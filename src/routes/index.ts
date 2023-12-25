@@ -12,6 +12,7 @@ import { MainLayout } from '@/layouts';
 const Login = lazy(() => import('@/pages/Login'));
 const Dashboard = lazy(() => import('@/pages/Home'));
 const TreeScreening = lazy(() => import('@/pages/TreeScreening'));
+const TissueDevelopment = lazy(() => import('@/pages/TissueDevelopment'));
 
 export const ROUTER = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const ROUTER = createBrowserRouter([
       {
         path: ROUTES.TreeScreening,
         Component: TreeScreening,
+      },
+      {
+        path: ROUTES.TissueDevelopment,
+        Component: TissueDevelopment,
       },
     ],
   },

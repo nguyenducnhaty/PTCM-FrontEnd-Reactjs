@@ -28,6 +28,8 @@
     "clsx": "^2.0.0",
     "date-fns": "^3.0.0",
     "dlx": "^0.2.1",
+    "json-server": "^0.17.4",
+    "json-server-auth": "^2.1.0",
     "lucide-react": "^0.294.0",
     "pnpm": "^8.12.1",
     "prettier": "^3.1.1",

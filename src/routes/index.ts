@@ -10,7 +10,7 @@ import { MainLayout } from '@/layouts';
 
 // Pages
 const Login = lazy(() => import('@/pages/Login'));
-const Dashboard = lazy(() => import('@/pages/Home'));
+const Dashboard = lazy(() => import('@/pages/PlantingDiary'));
 const TreeScreening = lazy(() => import('@/pages/TreeScreening'));
 const TissueDevelopment = lazy(() => import('@/pages/TissueDevelopment'));
 

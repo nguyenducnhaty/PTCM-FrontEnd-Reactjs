@@ -1,4 +1,4 @@
-import TissueDevelopmentForm from '@/components/TissueDevelopmentForm';
+import TissueDevelopmentForm from '@/pages/TissueDevelopment/components/TissueDevelopmentForm';
 import { Separator } from '@/components/ui/separator';
 
 const TissueDevelopment = () => {

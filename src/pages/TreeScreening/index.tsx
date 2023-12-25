@@ -1,4 +1,4 @@
-import { TreeScreeningForm } from '@/components/TreeScreeningForm';
+import { TreeScreeningForm } from '@/pages/TreeScreening/components/TreeScreeningForm';
 import { Separator } from '@/components/ui/separator';
 import { treescreening } from '@/constants';
 import { getData } from '@/helpers/apiHandle';

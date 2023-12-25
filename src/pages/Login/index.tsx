@@ -1,4 +1,4 @@
-import { UserAuthForm } from '@/components/UserAuthForm';
+import { UserAuthForm } from '@/pages/Login/components/UserAuthForm';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 

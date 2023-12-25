@@ -81,7 +81,7 @@ const Field: React.FC<FieldProps> = ({
 
   return (
     <FormField
-      control={form}
+      control={control}
       name={name}
       render={({ field }) => (
         <FormItem>

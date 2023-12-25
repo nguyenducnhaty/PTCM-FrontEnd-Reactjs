@@ -4,6 +4,7 @@ import { Slot } from '@radix-ui/react-slot';
 import {
   Controller,
   ControllerProps,
+  ControllerRenderProps,
   FieldPath,
   FieldValues,
   FormProvider,
@@ -12,6 +13,7 @@ import {
 
 import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
+import { Input } from './input';
 
 const Form = FormProvider;
 
@@ -164,6 +166,44 @@ const FormMessage = React.forwardRef<
   );
 });
 FormMessage.displayName = 'FormMessage';
+
+
+export const FormFieldRenderer = ({
+  label,
+  description,
+  placeholder,
+  fieldType,
+  field,
+}: {
+  label: string;
+  description: string;
+  placeholder: string;
+  fieldType: 'input' | 'checkbox';
+  field: ControllerRenderProps<FieldValues, any>;
+  // TODO: Get it if you need
+  // fieldState?: ControllerFieldState;
+  // formState?: UseFormStateReturn<FieldValues>;
+}) => {
+  const renderChildren = () => {
+
+    switch (fieldType) {
+      case 'input':
+        return <Input placeholder={placeholder} {...field} />;
+      // TODO: Update me
+      default:
+        return null; // No input rendered for other types
+    }
+  };
+
+  return (
+    <FormItem>
+      <FormLabel>{label}</FormLabel>
+      <FormControl>{renderChildren()}</FormControl>
+      <FormDescription>{description}</FormDescription>
+      <FormMessage />
+    </FormItem>
+  );
+};
 
 export {
   useFormField,

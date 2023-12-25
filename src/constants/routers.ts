@@ -1,4 +1,5 @@
 export const ROUTES = {
   ROOT: '/',
-  LOGIN: 'login',
+  LOGIN: '/login',
+  TreeScreening: '/tree-screening',
 };

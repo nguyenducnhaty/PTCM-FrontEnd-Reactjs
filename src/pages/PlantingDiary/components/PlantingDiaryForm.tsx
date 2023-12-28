@@ -3,24 +3,11 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 // Components
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 
 const profileFormSchema = z.object({
@@ -121,10 +108,7 @@ export function PlantingDiaryForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Đế cây</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Chọn đế cây" />
@@ -253,11 +237,7 @@ export function PlantingDiaryForm() {
             <FormItem>
               <FormLabel>Ghi chú</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="Ghi chú"
-                  className="resize-none"
-                  {...field}
-                />
+                <Textarea placeholder="Ghi chú" className="resize-none" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

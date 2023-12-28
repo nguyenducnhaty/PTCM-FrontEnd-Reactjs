@@ -1,6 +1,6 @@
 export const ROUTES = {
   ROOT: '/',
-  LOGIN: '/login',
-  TreeScreening: '/tree-screening',
-  TissueDevelopment: '/tissue-development',
+  LOGIN: '/auth/login',
+  TREE_SCREENING: '/tree-screening',
+  TISSUE_DEVELOPMENT: '/tissue-development',
 };

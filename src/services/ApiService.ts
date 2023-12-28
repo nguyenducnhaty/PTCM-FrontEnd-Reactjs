@@ -64,5 +64,6 @@ class ApiService {
 }
 
 const apiService = new ApiService(import.meta.env.VITE_API_END_POINT);
+const loginService = new ApiService(import.meta.env.VITE_API_LOGIN);
 
-export default apiService;
+export { apiService, loginService };

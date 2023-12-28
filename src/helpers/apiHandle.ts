@@ -7,5 +7,4 @@ export const getData = async <T>(url: string): Promise<T> => {
   return res.data;
 };
 
-export const multiFetcher = async (...urlArr: string[]) =>
-  Promise.allSettled(urlArr.map((url) => getData(url)));
+export const multiFetcher = async (...urlArr: string[]) => Promise.allSettled(urlArr.map((url) => getData(url)));

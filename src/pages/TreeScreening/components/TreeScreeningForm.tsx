@@ -6,34 +6,17 @@ import { CalendarIcon } from '@radix-ui/react-icons';
 import { cn } from '@/lib/utils';
 
 // Components
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 
 // Services
-import apiService from '@/services/ApiService';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { apiService } from '@/services/ApiService';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const profileFormSchema = z.object({
   barCode: z
@@ -208,16 +191,9 @@ export function TreeScreeningForm() {
                     <FormControl>
                       <Button
                         variant={'outline'}
-                        className={cn(
-                          'w-[240px] pl-3 text-left font-normal',
-                          !field.value && 'text-muted-foreground',
-                        )}
+                        className={cn('w-[240px] pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
                       >
-                        {field.value ? (
-                          format(field.value, 'PPP')
-                        ) : (
-                          <span>Hạn Cấy</span>
-                        )}
+                        {field.value ? format(field.value, 'PPP') : <span>Hạn Cấy</span>}
                         <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                       </Button>
                     </FormControl>
@@ -227,9 +203,7 @@ export function TreeScreeningForm() {
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
-                      disabled={(date) =>
-                        date < new Date() || date < new Date('1900-01-01')
-                      }
+                      disabled={(date) => date < new Date() || date < new Date('1900-01-01')}
                       initialFocus
                     />
                   </PopoverContent>
@@ -249,16 +223,9 @@ export function TreeScreeningForm() {
                     <FormControl>
                       <Button
                         variant={'outline'}
-                        className={cn(
-                          'w-[240px] pl-3 text-left font-normal',
-                          !field.value && 'text-muted-foreground',
-                        )}
+                        className={cn('w-[240px] pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
                       >
-                        {field.value ? (
-                          format(field.value, 'PPP')
-                        ) : (
-                          <span>Ngày soi</span>
-                        )}
+                        {field.value ? format(field.value, 'PPP') : <span>Ngày soi</span>}
                         <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                       </Button>
                     </FormControl>
@@ -268,9 +235,7 @@ export function TreeScreeningForm() {
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
-                      disabled={(date) =>
-                        date < new Date() || date < new Date('1900-01-01')
-                      }
+                      disabled={(date) => date < new Date() || date < new Date('1900-01-01')}
                       initialFocus
                     />
                   </PopoverContent>
@@ -313,10 +278,7 @@ export function TreeScreeningForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Mã Cây</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Chọn Mã Cây" />
@@ -343,10 +305,7 @@ export function TreeScreeningForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Mã MT</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Chọn Mã MT" />
@@ -401,10 +360,7 @@ export function TreeScreeningForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>GĐ</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Chọn GĐ" />
@@ -431,10 +387,7 @@ export function TreeScreeningForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Nhóm Cấy</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Chọn Nhóm Cấy" />
@@ -640,11 +593,7 @@ export function TreeScreeningForm() {
             <FormItem>
               <FormLabel>Ghi chú</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="Ghi chú"
-                  className="resize-none"
-                  {...field}
-                />
+                <Textarea placeholder="Ghi chú" className="resize-none" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -1,11 +1,11 @@
-import { ComponentType, lazy, ReactElement, Suspense } from 'react';
+import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 // Constants
 import { ROUTES } from '@/constants';
 
 // Layouts
-import { MainLayout } from '@/layouts';
+import ProtectedRoutes from '@/components/ProtectedRoute';
 
 const Login = lazy(() => import('@/pages/Login'));
 const Dashboard = lazy(() => import('@/pages/PlantingDiary'));
@@ -14,17 +14,8 @@ const TissueDevelopment = lazy(() => import('@/pages/TissueDevelopment'));
 
 export const ROUTER = createBrowserRouter([
   {
-    path: '',
-    children: [
-      {
-        path: ROUTES.LOGIN,
-        Component: Login,
-      },
-    ],
-  },
-  {
     path: '/',
-    Component: MainLayout,
+    Component: ProtectedRoutes,
     children: [
       {
         index: true,
@@ -37,6 +28,15 @@ export const ROUTER = createBrowserRouter([
       {
         path: ROUTES.TISSUE_DEVELOPMENT,
         Component: TissueDevelopment,
+      },
+    ],
+  },
+  {
+    path: '/auth',
+    children: [
+      {
+        path: ROUTES.LOGIN,
+        Component: Login,
       },
     ],
   },

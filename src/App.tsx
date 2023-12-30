@@ -11,8 +11,6 @@ import { ROUTER } from './routes';
 import { AppProvider } from './provider/AppProvider';
 
 const App = () => {
-  const existedUserSession = JSON.parse(localStorage.getItem('token') || 'null');
-
   return (
     <SWRConfig value={{ provider: () => new Map() }}>
       <AppProvider>

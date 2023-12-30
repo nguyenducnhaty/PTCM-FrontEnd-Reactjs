@@ -1,14 +1,10 @@
-import { useContext, useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 // Component
 import Lazy from '@/components/Lazy';
 import { Separator } from '@/components/ui/separator';
 import { ROUTES } from '@/constants';
 import { SidebarNav } from '../sidebar-nav';
-
-// Context
-import { AppContext } from '@/provider/AppProvider';
 
 const sidebarNavItems = [
   {
@@ -26,16 +22,6 @@ const sidebarNavItems = [
 ];
 
 const Layout = () => {
-  const contextValue = useContext(AppContext);
-  const { userState } = contextValue;
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    if (!userState.accessToken) {
-      navigate('/auth/login');
-    }
-  }, [userState]);
-
   return (
     <>
       <div className="md:hidden">

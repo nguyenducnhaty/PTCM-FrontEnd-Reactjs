@@ -84,7 +84,7 @@ dependencies:
     specifier: ^7.49.2
     version: 7.49.2(react@18.2.0)
   react-router-dom:
-    specifier: ^6.20.1
+    specifier: ^6.21.0
     version: 6.21.0(react-dom@18.2.0)(react@18.2.0)
   shadcn-ui:
     specifier: ^0.4.1

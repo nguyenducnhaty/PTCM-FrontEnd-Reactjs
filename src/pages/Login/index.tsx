@@ -24,10 +24,7 @@ const Login = () => {
       <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <a
           href="/examples/authentication"
-          className={cn(
-            buttonVariants({ variant: 'ghost' }),
-            'absolute right-4 top-4 md:right-8 md:top-8',
-          )}
+          className={cn(buttonVariants({ variant: 'ghost' }), 'absolute right-4 top-4 md:right-8 md:top-8')}
         >
           Login
         </a>
@@ -63,17 +60,11 @@ const Login = () => {
             <UserAuthForm />
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our <br></br>
-              <a
-                href="/terms"
-                className="underline underline-offset-4 hover:text-primary"
-              >
+              <a href="/terms" className="underline underline-offset-4 hover:text-primary">
                 Terms of Service
               </a>{' '}
               and{' '}
-              <a
-                href="/privacy"
-                className="underline underline-offset-4 hover:text-primary"
-              >
+              <a href="/privacy" className="underline underline-offset-4 hover:text-primary">
                 Privacy Policy
               </a>
               .

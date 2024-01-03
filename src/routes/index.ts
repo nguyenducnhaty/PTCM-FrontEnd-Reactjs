@@ -11,6 +11,8 @@ const Login = lazy(() => import('@/pages/Login'));
 const Dashboard = lazy(() => import('@/pages/PlantingDiary'));
 const TreeScreening = lazy(() => import('@/pages/TreeScreening'));
 const TissueDevelopment = lazy(() => import('@/pages/TissueDevelopment'));
+const ScanForInfectedSamples = lazy(() => import('@/pages/ScanForInfectedSamples'));
+const EnterInfectedSampleInformation = lazy(() => import('@/pages/EnterInfectedSampleInformation'));
 
 export const ROUTER = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ export const ROUTER = createBrowserRouter([
       {
         path: ROUTES.TISSUE_DEVELOPMENT,
         Component: TissueDevelopment,
+      },
+      {
+        path: ROUTES.ENTER_INFECTED_SAMPLE_INFORMATION,
+        Component: EnterInfectedSampleInformation,
+      },
+      {
+        path: ROUTES.SCAN_FOR_INFECTED_SAMPLES,
+        Component: ScanForInfectedSamples,
       },
     ],
   },

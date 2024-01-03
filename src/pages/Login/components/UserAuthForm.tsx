@@ -66,6 +66,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           user: data.user,
         });
         localStorage.setItem('token', JSON.stringify(data.accessToken));
+        localStorage.setItem('user', JSON.stringify(data.user));
         navigate('/');
       }
     } catch (error) {

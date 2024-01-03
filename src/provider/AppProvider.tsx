@@ -29,8 +29,8 @@ const AppContextDefaultValue: AppContextType = {
 
 // Initialize the initial state for each reducer
 const initialUserState: UserStateType = {
-  accessToken: null,
-  user: null,
+  accessToken: JSON.parse(localStorage.getItem('token') || 'null'),
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
 };
 
 // Create the AppContext

@@ -8,16 +8,24 @@ import { SidebarNav } from '../sidebar-nav';
 
 const sidebarNavItems = [
   {
-    title: 'Nhật kí cấy',
-    href: ROUTES.ROOT,
-  },
-  {
-    title: 'Soi cây',
+    title: 'Soi Cây',
     href: ROUTES.TREE_SCREENING,
   },
   {
     title: 'Phát Mô',
     href: ROUTES.TISSUE_DEVELOPMENT,
+  },
+  {
+    title: 'Nhật Kí Cấy',
+    href: ROUTES.ROOT,
+  },
+  {
+    title: 'Nhập Mẫu Nhiễm',
+    href: ROUTES.ENTER_INFECTED_SAMPLE_INFORMATION,
+  },
+  {
+    title: 'Quét Mẫu Nhiễm',
+    href: ROUTES.SCAN_FOR_INFECTED_SAMPLES,
   },
 ];
 

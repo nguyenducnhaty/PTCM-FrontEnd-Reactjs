@@ -1,8 +1,12 @@
+import { Button } from '@/components/ui/button';
 import { DataTable } from './components/DataTable';
 import { columns } from './components/columns';
 import { Separator } from '@/components/ui/separator';
+import { useState } from 'react';
+import { DialogForm } from './components/Dialog/DialogForm';
 
 const Environment = () => {
+  const [isAddTaskDialogOpen, setAddTaskDialogOpen] = useState(false); // Renamed open to isAddTaskDialogOpen
   const tasks = [
     {
       id: 'TASK-8782',
@@ -34,15 +38,27 @@ const Environment = () => {
     },
   ];
 
+  const openAddTaskDialog = () => {
+    setAddTaskDialogOpen(true);
+  };
+
   return (
-    <div className="space-y-6">
-      <div>
-        <h3 className="text-lg font-medium">Nhật ký cấy</h3>
-        <p className="text-sm text-muted-foreground">Nhật ký cấy sẽ được lưu trữ tại đây</p>
+    <>
+      <div className="space-y-6">
+        <div className=" flex justify-between">
+          <div>
+            <h3 className="text-lg font-medium">Nhật ký cấy</h3>
+            <p className="text-sm text-muted-foreground">Nhật ký cấy sẽ được lưu trữ tại đây</p>
+          </div>
+          <Button variant="outline" onClick={openAddTaskDialog}>
+            Add
+          </Button>
+        </div>
+        <Separator />
+        <DataTable data={tasks} columns={columns} />
       </div>
-      <Separator />
-      <DataTable data={tasks} columns={columns} />
-    </div>
+      <DialogForm open={isAddTaskDialogOpen} setOpen={setAddTaskDialogOpen} />
+    </>
   );
 };
 

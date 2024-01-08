@@ -13,6 +13,7 @@ const TreeScreening = lazy(() => import('@/pages/TreeScreening'));
 const TissueDevelopment = lazy(() => import('@/pages/TissueDevelopment'));
 const ScanForInfectedSamples = lazy(() => import('@/pages/ScanForInfectedSamples'));
 const EnterInfectedSampleInformation = lazy(() => import('@/pages/EnterInfectedSampleInformation'));
+const Environment = lazy(() => import('@/pages/Environment'));
 
 export const ROUTER = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const ROUTER = createBrowserRouter([
       {
         path: ROUTES.SCAN_FOR_INFECTED_SAMPLES,
         Component: ScanForInfectedSamples,
+      },
+      {
+        path: ROUTES.ENVIRONMENT,
+        Component: Environment,
       },
     ],
   },

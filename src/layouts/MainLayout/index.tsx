@@ -27,6 +27,10 @@ const sidebarNavItems = [
     title: 'Quét Mẫu Nhiễm',
     href: ROUTES.SCAN_FOR_INFECTED_SAMPLES,
   },
+  {
+    title: 'Môi Trường',
+    href: ROUTES.ENVIRONMENT,
+  },
 ];
 
 const Layout = () => {

@@ -1,11 +1,12 @@
 import Layout from '@/layouts/MainLayout';
+import useAuthStore from '@/stores/authStore';
 
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoutes = () => {
-  const localStorageToken = JSON.parse(localStorage.getItem('token') || 'null');
+  const { isLoggedIn } = useAuthStore();
 
-  return localStorageToken ? <Layout /> : <Navigate to="/auth/login" replace />;
+  return isLoggedIn ? <Layout /> : <Navigate to="/auth/login" replace />;
 };
 
 export default ProtectedRoutes;

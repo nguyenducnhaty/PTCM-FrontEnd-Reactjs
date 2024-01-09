@@ -1,0 +1,22 @@
+{
+  "title": "welcome",
+  "email": "E-mail",
+  "plsEnter": "Please input your",
+  "inputInvalid": "The input is not valid",
+  "password": "Password",
+  "remember": "Remember me",
+  "signIn": "Sign in",
+  "signOut": "Sign Out",
+  "logout": "Log out",
+  "sessionExpired": "Your session has expired. Please log in again.",
+  "educationInfo": "Education",
+  "pleaseLogin": "Welcome back, please login to your account",
+  "planManagement": {
+    "title": "Plan Management",
+    "planList": "Plan List",
+    "createPlan": "Create Plan",
+    "runningPlan": "Running Plan",
+    "completedPlan": "Completed Plan",
+    "newPlan": "New Plan"
+  }
+}

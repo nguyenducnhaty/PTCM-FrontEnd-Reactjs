@@ -11,12 +11,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Dispatch, SetStateAction } from 'react';
 
-interface DialogFormProps {
+interface DialogEnvironmentFormProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export function DialogForm({ open, setOpen }: DialogFormProps) {
+export function DialogEnvironmentForm({ open, setOpen }: DialogEnvironmentFormProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-[425px]">

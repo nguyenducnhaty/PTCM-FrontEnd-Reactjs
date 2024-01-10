@@ -9,10 +9,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import DrawerEnvironmentTable from './DrawerEnvironmentTable';
+import { DialogEnvironmentForm } from './DialogEnvironmentForm';
 
 import { taskSchema } from '../data/schema';
-import DialogTable from './Dialog/DialogTable';
-import { DialogForm } from './Dialog/DialogForm';
 
 interface Invoice {
   invoice: string;
@@ -60,8 +60,8 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
           <DropdownMenuItem onClick={openDialogTable}>Show table</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DialogTable invoices={invoices} open={openTable} setOpen={setOpenTable} />
-      <DialogForm open={openForm} setOpen={setOpenForm} />
+      <DrawerEnvironmentTable invoices={invoices} open={openTable} setOpen={setOpenTable} />
+      <DialogEnvironmentForm open={openForm} setOpen={setOpenForm} />
     </>
   );
 }

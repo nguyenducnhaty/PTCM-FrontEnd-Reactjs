@@ -17,13 +17,13 @@ interface Invoice {
   paymentMethod: string;
 }
 
-interface DialogTableProps {
+interface DrawerEnvironmentTableProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   invoices: Invoice[];
 }
 
-const DialogTable: React.FC<DialogTableProps> = ({ open, setOpen, invoices }) => {
+const DrawerEnvironmentTable: React.FC<DrawerEnvironmentTableProps> = ({ open, setOpen, invoices }) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent>
@@ -71,4 +71,4 @@ const DialogTable: React.FC<DialogTableProps> = ({ open, setOpen, invoices }) =>
   );
 };
 
-export default DialogTable;
+export default DrawerEnvironmentTable;

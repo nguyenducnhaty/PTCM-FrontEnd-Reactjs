@@ -8,14 +8,14 @@ import { Toaster } from '@/components/ui/toaster';
 import { ROUTER } from './routes';
 
 // Provider
-import { AppProvider } from './provider/AppProvider';
+import { ThemeProvider } from './theme/theme-wrapper';
 
 const App = () => {
   return (
     <SWRConfig value={{ provider: () => new Map() }}>
-      <AppProvider>
+      <ThemeProvider>
         <RouterProvider router={ROUTER} />
-      </AppProvider>
+      </ThemeProvider>
       <Toaster />
     </SWRConfig>
   );

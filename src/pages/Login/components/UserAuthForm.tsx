@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Components
@@ -12,10 +12,11 @@ import { useToast } from '@/components/ui/use-toast';
 // Services
 import { loginService } from '@/services';
 
-// Context
-import { USER_ACTION } from '@/reduces/UserReducer';
-import { AppContext } from '@/provider/AppProvider';
+// Constants
 import { API } from '@/constants/api';
+
+// stores
+import useAuthStore from '@/stores/authStore';
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -33,8 +34,7 @@ interface loginResponse {
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const { toast } = useToast();
-  const contextValue = useContext(AppContext);
-  const { dispatchUser } = contextValue;
+  const { login } = useAuthStore();
   let navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [loginData, setLoginData] = useState<LoginData>({
@@ -57,16 +57,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       const data: loginResponse = await loginService.post(API.LOGIN, loginData);
 
       if (data) {
+        login(data.accessToken, data.user);
+
         toast({
           title: 'Login success',
         });
-        dispatchUser({
-          type: USER_ACTION.SET_USER,
-          accessToken: data.accessToken,
-          user: data.user,
-        });
-        localStorage.setItem('token', JSON.stringify(data.accessToken));
-        localStorage.setItem('user', JSON.stringify(data.user));
+
         navigate('/');
       }
     } catch (error) {

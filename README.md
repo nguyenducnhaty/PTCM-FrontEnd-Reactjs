@@ -1,30 +1,54 @@
-# React + TypeScript + Vite
+# React Project README
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React project scaffolded with Vite. Below are some useful scripts that can be executed in the project.
 
-Currently, two official plugins are available:
+## Available Scripts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+In the project directory, you can run:
 
-## Expanding the ESLint configuration
+### `npm run dev`
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Runs the app in development mode using Vite.
 
-- Configure the top-level `parserOptions` property like this:
+### `npm run build`
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
+Builds the app for production using TypeScript and Vite.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### `npm run lint`
+
+Lints the project using ESLint with TypeScript and JSX support. Reports unused directives and has a maximum warning count of 0.
+
+### `npm run preview`
+
+Launches the Vite preview server to preview the production build.
+
+### `npm run test-coverage`
+
+Runs Jest with coverage reporting. This script uses Pnpm to execute the tests.
+
+### `npm run test`
+
+Runs Jest for testing. This script also uses Pnpm.
+
+### `npm run format`
+
+Formats the codebase using Prettier for files with extensions: js, jsx, ts, tsx, json, css, md.
+
+### `npm run server`
+
+Starts a JSON server with authentication on port 7000 using the `json-server-auth` package. The server reads data from `db.json`.
+
+### Logging In
+
+To log in, you can use the following credentials:
+
+- **Email**: admin@gmail.com
+- **Password**: 123123123
+
+## Notes
+
+- Make sure to install dependencies using `npm install` before running any of the scripts.
+- Adjust the configuration files for ESLint, Prettier, and Jest based on your project requirements.
+- Feel free to modify the scripts in the `package.json` file to suit your needs.
+
+> **Note:** Customize the provided scripts based on your project requirements. These scripts are configured to work with a Vite and TypeScript setup. Make sure to adapt them if you have a different project structure or tooling. 🚀

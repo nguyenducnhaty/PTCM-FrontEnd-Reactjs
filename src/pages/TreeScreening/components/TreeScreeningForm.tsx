@@ -14,6 +14,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
 
 // Services
 import { apiService } from '@/services/ApiService';
@@ -327,6 +328,7 @@ export function TreeScreeningForm() {
             )}
           />
         </div>
+        <Separator />
         <div className="flex gap-4">
           <FormField
             control={form.control}

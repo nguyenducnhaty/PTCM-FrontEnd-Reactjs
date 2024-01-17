@@ -18,7 +18,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans)', ...fontFamily.sans]
+        sans: ['Arial', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

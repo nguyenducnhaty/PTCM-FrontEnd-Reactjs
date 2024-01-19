@@ -14,6 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const profileFormSchema = z.object({
   barCode: z
@@ -96,236 +97,240 @@ const TissueDevelopmentForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="flex flex-row gap-4">
-          <div className="basis-1/2">
-            <FormField
-              control={form.control}
-              name="barCode"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>BarCode</FormLabel>
-                  <FormControl>
-                    <Input placeholder="BarCode" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="basis-1/2">
-            <FormField
-              control={form.control}
-              name="batchCode"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Mã Batch</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Mã Batch" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="basis-1/4">
-            <FormField
-              control={form.control}
-              name="seedCode"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Mã Giống</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Mã Giống" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        </div>
-        <div className="flex gap-4">
-          <FormField
-            control={form.control}
-            name="motherOrigin"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Gốc Mẹ</FormLabel>
-                <FormControl>
-                  <Input placeholder="Gốc Mẹ" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="weekKh"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Tuần KH</FormLabel>
-                <FormControl>
-                  <Input placeholder="Tuần KH" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="date"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Ngày</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={'outline'}
-                        className={cn('w-[240px] pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
-                      >
-                        {field.value ? format(field.value, 'PPP') : <span>Ngày</span>}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) => date < new Date() || date < new Date('1900-01-01')}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="flex gap-4">
-          <FormField
-            control={form.control}
-            name="staff"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nhân viên</FormLabel>
-                <FormControl>
-                  <Input placeholder="Nhân viên" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="CChild"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>C.Con</FormLabel>
-                <FormControl>
-                  <Input placeholder="C.Con" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="flex gap-4">
-          <FormField
-            control={form.control}
-            name="treeCode"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Mã cây</FormLabel>
-                <FormControl>
-                  <Input placeholder="Mã cây" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="cMon"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>C.Mẹ</FormLabel>
-                <FormControl>
-                  <Input placeholder="C.Mẹ" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="treeGroup"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nhóm Cây</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Chọn Nhóm Cây" />
-                    </SelectTrigger>
-                  </FormControl>
-                  {mockSelect && (
-                    <SelectContent>
-                      {mockSelect.length > 0 &&
-                        mockSelect.map((option) => (
-                          <SelectItem key={option.key} value={option.key}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                    </SelectContent>
+        <Card>
+          <CardHeader>
+            <CardTitle></CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div>
+                <FormField
+                  control={form.control}
+                  name="barCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>BarCode</FormLabel>
+                      <FormControl>
+                        <Input placeholder="BarCode" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
                   )}
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="nvGroup"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nhóm NV</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Chọn Nhóm NV" />
-                    </SelectTrigger>
-                  </FormControl>
-                  {mockSelect && (
-                    <SelectContent>
-                      {mockSelect.length > 0 &&
-                        mockSelect.map((option) => (
-                          <SelectItem key={option.key} value={option.key}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                    </SelectContent>
+                />
+                <FormField
+                  control={form.control}
+                  name="motherOrigin"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Gốc Mẹ</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Gốc Mẹ" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
                   )}
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <FormField
-          control={form.control}
-          name="note"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Ghi chú</FormLabel>
-              <FormControl>
-                <Textarea placeholder="Ghi chú" className="resize-none" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                />
+                <FormField
+                  control={form.control}
+                  name="staff"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nhân viên</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Nhân viên" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="cMon"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>C.Mẹ</FormLabel>
+                      <FormControl>
+                        <Input placeholder="C.Mẹ" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div>
+                <FormField
+                  control={form.control}
+                  name="batchCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Mã Batch</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Mã Batch" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="weekKh"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Tuần KH</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Tuần KH" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="CChild"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>C.Con</FormLabel>
+                      <FormControl>
+                        <Input placeholder="C.Con" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="treeGroup"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nhóm Cây</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Chọn Nhóm Cây" />
+                          </SelectTrigger>
+                        </FormControl>
+                        {mockSelect && (
+                          <SelectContent>
+                            {mockSelect.length > 0 &&
+                              mockSelect.map((option) => (
+                                <SelectItem key={option.key} value={option.key}>
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                          </SelectContent>
+                        )}
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div>
+                <FormField
+                  control={form.control}
+                  name="seedCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Mã Giống</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Mã Giống" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="date"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col pt-2.5">
+                      <FormLabel>Ngày</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={'outline'}
+                              className={cn(
+                                'w-[240px] pl-3 text-left font-normal',
+                                !field.value && 'text-muted-foreground',
+                              )}
+                            >
+                              {field.value ? format(field.value, 'PPP') : <span>Ngày</span>}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) => date < new Date() || date < new Date('1900-01-01')}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="treeCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Mã cây</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Mã cây" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="nvGroup"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nhóm NV</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Chọn Nhóm NV" />
+                          </SelectTrigger>
+                        </FormControl>
+                        {mockSelect && (
+                          <SelectContent>
+                            {mockSelect.length > 0 &&
+                              mockSelect.map((option) => (
+                                <SelectItem key={option.key} value={option.key}>
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                          </SelectContent>
+                        )}
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            <FormField
+              control={form.control}
+              name="note"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Ghi chú</FormLabel>
+                  <FormControl>
+                    <Textarea placeholder="Ghi chú" className="resize-none" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+        </Card>
 
         <Button type="submit">Tạo</Button>
       </form>

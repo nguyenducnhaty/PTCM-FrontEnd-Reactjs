@@ -14,6 +14,7 @@ const TissueDevelopment = lazy(() => import('@/pages/TissueDevelopment'));
 const ScanForInfectedSamples = lazy(() => import('@/pages/ScanForInfectedSamples'));
 const EnterInfectedSampleInformation = lazy(() => import('@/pages/EnterInfectedSampleInformation'));
 const Environment = lazy(() => import('@/pages/Environment'));
+const BrightRoom = lazy(() => import('@/pages/BrightRoom'));
 
 export const ROUTER = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const ROUTER = createBrowserRouter([
       {
         path: ROUTES.ENVIRONMENT,
         Component: Environment,
+      },
+      {
+        path: ROUTES.BRIGHT_ROOM,
+        Component: BrightRoom,
       },
     ],
   },

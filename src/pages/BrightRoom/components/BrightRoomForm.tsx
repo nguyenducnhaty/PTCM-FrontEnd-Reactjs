@@ -16,8 +16,32 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-const InfectedSampleInformationSchema = z.object({
+const BrightRoomSchema = z.object({
   typeOfInfection: z
+    .string()
+    .min(2, {
+      message: 'Username must be at least 2 characters.',
+    })
+    .max(30, {
+      message: 'Username must not be longer than 30 characters.',
+    }),
+  infectionLevel: z
+    .string()
+    .min(2, {
+      message: 'Username must be at least 2 characters.',
+    })
+    .max(30, {
+      message: 'Username must not be longer than 30 characters.',
+    }),
+  brightRoom: z
+    .string()
+    .min(2, {
+      message: 'Username must be at least 2 characters.',
+    })
+    .max(30, {
+      message: 'Username must not be longer than 30 characters.',
+    }),
+  status: z
     .string()
     .min(2, {
       message: 'Username must be at least 2 characters.',
@@ -30,6 +54,11 @@ const InfectedSampleInformationSchema = z.object({
     required_error: 'A date of birth is required.',
   }),
   barCode: z.string().max(160).min(4),
+  week: z.string().max(160).min(4),
+  weekKH: z.string().max(160).min(4),
+  varietyCode: z.string().max(160).min(4),
+  CChild: z.string().max(160).min(4),
+  staff: z.string().max(160).min(4),
   note: z
     .string()
     .min(2, {
@@ -40,18 +69,18 @@ const InfectedSampleInformationSchema = z.object({
     }),
 });
 
-type InfectedSampleInformationFormValues = z.infer<typeof InfectedSampleInformationSchema>;
+type BrightRoomFormValues = z.infer<typeof BrightRoomSchema>;
 
-const InfectedSampleInformationForm = () => {
+const BrightRoomForm = () => {
   const { toast } = useToast();
-  const defaultValues: Partial<InfectedSampleInformationFormValues> = { barCode: '' };
-  const form = useForm<InfectedSampleInformationFormValues>({
-    resolver: zodResolver(InfectedSampleInformationSchema),
+  const defaultValues: Partial<BrightRoomFormValues> = { barCode: '' };
+  const form = useForm<BrightRoomFormValues>({
+    resolver: zodResolver(BrightRoomSchema),
     defaultValues,
     mode: 'onChange',
   });
 
-  function onSubmit(data: InfectedSampleInformationFormValues) {
+  function onSubmit(data: BrightRoomFormValues) {
     toast({
       title: 'You submitted the following values:',
       description: (
@@ -84,35 +113,21 @@ const InfectedSampleInformationForm = () => {
             <CardTitle></CardTitle>
           </CardHeader>
           <CardContent>
+            <FormField
+              control={form.control}
+              name="barCode"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Barcode</FormLabel>
+                  <FormControl>
+                    <Input placeholder="BarCode" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
               <div>
-                <FormField
-                  control={form.control}
-                  name="typeOfInfection"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Số barcode</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Chọn loại nhiễm" />
-                          </SelectTrigger>
-                        </FormControl>
-                        {mockSelect && (
-                          <SelectContent>
-                            {mockSelect.length > 0 &&
-                              mockSelect.map((option) => (
-                                <SelectItem key={option.key} value={option.key}>
-                                  {option.label}
-                                </SelectItem>
-                              ))}
-                          </SelectContent>
-                        )}
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
                 <FormField
                   control={form.control}
                   name="transplantationLimit"
@@ -150,197 +165,12 @@ const InfectedSampleInformationForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="manufacture"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>T.Con</FormLabel>
-                      <FormControl>
-                        <Input placeholder="T.Con" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
                   name="barCode"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Tuần</FormLabel>
+                      <FormLabel>Mã Batch</FormLabel>
                       <FormControl>
-                        <Input placeholder="Tuần" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="barCode"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Gốc Mẹ</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Gốc Mẹ" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div>
-                <FormField
-                  control={form.control}
-                  name="typeOfInfection"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Loại nhiễm</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Chọn loại nhiễm" />
-                          </SelectTrigger>
-                        </FormControl>
-                        {mockSelect && (
-                          <SelectContent>
-                            {mockSelect.length > 0 &&
-                              mockSelect.map((option) => (
-                                <SelectItem key={option.key} value={option.key}>
-                                  {option.label}
-                                </SelectItem>
-                              ))}
-                          </SelectContent>
-                        )}
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="transplantationLimit"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col pt-2.5">
-                      <FormLabel>Ngày Cấy</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant={'outline'}
-                              className={cn(
-                                'w-[240px] pl-3 text-left font-normal',
-                                !field.value && 'text-muted-foreground',
-                              )}
-                            >
-                              {field.value ? format(field.value, 'PPP') : <span>Ngày Cấy</span>}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            disabled={(date) => date < new Date() || date < new Date('1900-01-01')}
-                            initialFocus
-                          />
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="manufacture"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>T.Con</FormLabel>
-                      <FormControl>
-                        <Input placeholder="T.Con" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="barCode"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Mã MT</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Mã MT" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="typeOfInfection"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Độ Nhiễm</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Độ Nhiễm" />
-                          </SelectTrigger>
-                        </FormControl>
-                        {mockSelect && (
-                          <SelectContent>
-                            {mockSelect.length > 0 &&
-                              mockSelect.map((option) => (
-                                <SelectItem key={option.key} value={option.key}>
-                                  {option.label}
-                                </SelectItem>
-                              ))}
-                          </SelectContent>
-                        )}
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div>
-                <FormField
-                  control={form.control}
-                  name="typeOfInfection"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>NV Cấy</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Chọn loại nhiễm" />
-                          </SelectTrigger>
-                        </FormControl>
-                        {mockSelect && (
-                          <SelectContent>
-                            {mockSelect.length > 0 &&
-                              mockSelect.map((option) => (
-                                <SelectItem key={option.key} value={option.key}>
-                                  {option.label}
-                                </SelectItem>
-                              ))}
-                          </SelectContent>
-                        )}
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="barCode"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Tuần KH</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Tuần KH" {...field} />
+                        <Input placeholder="Mã Batch" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -375,14 +205,68 @@ const InfectedSampleInformationForm = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="typeOfInfection"
+                  name="manufacture"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Sản Xuất</FormLabel>
+                      <FormLabel>T.Con</FormLabel>
+                      <FormControl>
+                        <Input placeholder="T.Con" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="note"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Ghi chú</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="Ghi chú" className="resize-none" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div>
+                <FormField
+                  control={form.control}
+                  name="week"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Tuần</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Tuần" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="varietyCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Mã Giống</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Mã Giống" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="infectionLevel"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nhóm cây</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Sản Xuất" />
+                            <SelectValue placeholder="Nhóm cây" />
                           </SelectTrigger>
                         </FormControl>
                         {mockSelect && (
@@ -396,6 +280,74 @@ const InfectedSampleInformationForm = () => {
                           </SelectContent>
                         )}
                       </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="CChild"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>C.Con</FormLabel>
+                      <FormControl>
+                        <Input placeholder="C.Con" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="status"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Trạng thái</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Trạng thái" />
+                          </SelectTrigger>
+                        </FormControl>
+                        {mockSelect && (
+                          <SelectContent>
+                            {mockSelect.length > 0 &&
+                              mockSelect.map((option) => (
+                                <SelectItem key={option.key} value={option.key}>
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                          </SelectContent>
+                        )}
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div>
+                <FormField
+                  control={form.control}
+                  name="weekKH"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Tuần KH</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Tuần KH" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="barCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Gốc Mẹ</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Gốc Mẹ" {...field} />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -427,44 +379,125 @@ const InfectedSampleInformationForm = () => {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="brightRoom"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phòng sáng</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Phòng sáng" />
+                          </SelectTrigger>
+                        </FormControl>
+                        {mockSelect && (
+                          <SelectContent>
+                            {mockSelect.length > 0 &&
+                              mockSelect.map((option) => (
+                                <SelectItem key={option.key} value={option.key}>
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                          </SelectContent>
+                        )}
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="staff"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nhân Viên</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Nhân Viên" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
               <div>
                 <FormField
                   control={form.control}
-                  name="barCode"
+                  name="infectionLevel"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Mã Batch</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Mã Batch" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="barCode"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Mã Giống</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Mã Giống" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="typeOfInfection"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Nhóm Cấy</FormLabel>
+                      <FormLabel>Nhập xuất</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Nhóm Cấy" />
+                            <SelectValue placeholder="Chọn Nhập Xuất" />
+                          </SelectTrigger>
+                        </FormControl>
+                        {mockSelect && (
+                          <SelectContent>
+                            {mockSelect.length > 0 &&
+                              mockSelect.map((option) => (
+                                <SelectItem key={option.key} value={option.key}>
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                          </SelectContent>
+                        )}
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="barCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Mã MT</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Mã MT" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="infectionLevel"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Độ Nhiễm</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Chọn Độ Nhiễm" />
+                          </SelectTrigger>
+                        </FormControl>
+                        {mockSelect && (
+                          <SelectContent>
+                            {mockSelect.length > 0 &&
+                              mockSelect.map((option) => (
+                                <SelectItem key={option.key} value={option.key}>
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                          </SelectContent>
+                        )}
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="infectionLevel"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Kệ</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Chọn kệ" />
                           </SelectTrigger>
                         </FormControl>
                         {mockSelect && (
@@ -484,19 +517,6 @@ const InfectedSampleInformationForm = () => {
                 />
               </div>
             </div>
-            <FormField
-              control={form.control}
-              name="note"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Ghi chú</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder="Ghi chú" className="resize-none" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
           </CardContent>
         </Card>
 
@@ -506,4 +526,4 @@ const InfectedSampleInformationForm = () => {
   );
 };
 
-export default InfectedSampleInformationForm;
+export default BrightRoomForm;

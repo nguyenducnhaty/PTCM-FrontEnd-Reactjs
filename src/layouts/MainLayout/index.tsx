@@ -1,16 +1,14 @@
 import { Outlet } from 'react-router-dom';
-import { AlertCircle, Archive, ArchiveX, File, LucideIcon, PenBox, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
 // Component
 import Lazy from '@/components/Lazy';
 import { Separator } from '@/components/ui/separator';
-import { ROUTES } from '@/constants';
+import { sidebarNavItems } from '@/constants';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { Nav } from '../Nav';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,59 +18,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-
-type Link = {
-  title: string;
-  href: string;
-  label?: string;
-  icon: LucideIcon;
-  variant: 'default' | 'ghost';
-};
-
-const sidebarNavItems: Link[] = [
-  {
-    title: 'Soi Cây',
-    href: ROUTES.TREE_SCREENING,
-    label: '',
-    icon: PenBox,
-    variant: 'ghost',
-  },
-  {
-    title: 'Phát Mô',
-    href: ROUTES.TISSUE_DEVELOPMENT,
-    label: '',
-    icon: AlertCircle,
-    variant: 'ghost',
-  },
-  {
-    title: 'Nhật Kí Cấy',
-    href: ROUTES.ROOT,
-    label: '',
-    icon: Archive,
-    variant: 'ghost',
-  },
-  {
-    title: 'Nhập Mẫu Nhiễm',
-    href: ROUTES.ENTER_INFECTED_SAMPLE_INFORMATION,
-    label: '',
-    icon: ArchiveX,
-    variant: 'ghost',
-  },
-  {
-    title: 'Quét Mẫu Nhiễm',
-    href: ROUTES.SCAN_FOR_INFECTED_SAMPLES,
-    label: '',
-    icon: File,
-    variant: 'ghost',
-  },
-  {
-    title: 'Môi Trường',
-    href: ROUTES.ENVIRONMENT,
-    label: '',
-    icon: Send,
-    variant: 'ghost',
-  },
-];
 
 const Layout = () => {
   const layout = localStorage.getItem('layout') || null;
@@ -108,10 +53,7 @@ const Layout = () => {
             <div
               className="w-full"
               // className={cn('w-full flex-1', isCollapsed ? 'w-full' : 'w-[80%]')}
-            >
-              <h1>Dashboard</h1>
-              {/* <AccountSwitcher isCollapsed={isCollapsed} accounts={accounts} /> */}
-            </div>
+            ></div>
           </div>
           <Separator />
           <Nav isCollapsed={isCollapsed} links={sidebarNavItems} />
@@ -119,7 +61,7 @@ const Layout = () => {
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
           <div className="flex items-center justify-between px-4 py-2">
-            <h1 className="text-xl font-bold">Inbox</h1>
+            <h1 className="text-xl font-bold">Dashboard</h1>
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Avatar>
@@ -138,11 +80,9 @@ const Layout = () => {
             </DropdownMenu>
           </div>
           <Separator />
-          <ScrollArea className="h-full">
-            <Lazy>
-              <Outlet />
-            </Lazy>
-          </ScrollArea>
+          <Lazy>
+            <Outlet />
+          </Lazy>
         </ResizablePanel>
       </ResizablePanelGroup>
     </TooltipProvider>

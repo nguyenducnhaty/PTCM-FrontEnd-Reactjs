@@ -3,10 +3,10 @@ import InfectedSampleInformationForm from './components/InfectedSampleInformatio
 
 const EnterInfectedSampleInformation = () => {
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-2 space-y-6 p-4 pt-4">
       <div>
-        <h3 className="text-lg font-medium">Nhật ký cấy</h3>
-        <p className="text-sm text-muted-foreground">Nhật ký cấy sẽ được lưu trữ tại đây</p>
+        <h3 className="text-lg font-medium">Nhập Mẫu Nhiễm</h3>
+        <p className="text-sm text-muted-foreground">Nhập Mẫu Nhiễm sẽ được lưu trữ tại đây</p>
       </div>
       <Separator />
       <InfectedSampleInformationForm />

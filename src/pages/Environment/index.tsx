@@ -13,6 +13,7 @@ import { DataTableRowActions } from './components/DataTableRowActions';
 
 import { labels, priorities, statuses } from './data/data';
 import { Task } from './data/schema';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Environment = () => {
   const [isAddTaskDialogOpen, setAddTaskDialogOpen] = useState(false); // Renamed open to isAddTaskDialogOpen
@@ -144,18 +145,23 @@ const Environment = () => {
 
   return (
     <>
-      <div className="space-y-6">
-        <div className=" flex justify-between">
+      <div className="flex flex-col gap-2 space-y-6 p-4 pt-4">
+        <div className="flex justify-between">
           <div>
-            <h3 className="text-lg font-medium">Nhật ký cấy</h3>
-            <p className="text-sm text-muted-foreground">Nhật ký cấy sẽ được lưu trữ tại đây</p>
+            <h3 className="text-lg font-medium">Môi Trường</h3>
+            <p className="text-sm text-muted-foreground">Môi Trường sẽ được lưu trữ tại đây</p>
           </div>
-          <Button variant="outline" onClick={openAddTaskDialog}>
-            Add
-          </Button>
+          <Button onClick={openAddTaskDialog}>Add</Button>
         </div>
         <Separator />
-        <DataTable data={tasks} columns={columns} />
+        <Card>
+          <CardHeader>
+            <CardTitle></CardTitle>
+          </CardHeader>
+          <CardContent>
+            <DataTable data={tasks} columns={columns} />
+          </CardContent>
+        </Card>
       </div>
       <DialogEnvironmentForm open={isAddTaskDialogOpen} setOpen={setAddTaskDialogOpen} />
     </>

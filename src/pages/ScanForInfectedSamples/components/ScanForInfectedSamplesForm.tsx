@@ -9,6 +9,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const ScanForInfectedSamplesSchema = z.object({
   typeOfInfection: z
@@ -70,74 +71,94 @@ const ScanForInfectedSamplesForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="flex flex-row gap-4">
-          <FormField
-            control={form.control}
-            name="typeOfInfection"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Loại nhiễm</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Chọn loại nhiễm" />
-                    </SelectTrigger>
-                  </FormControl>
-                  {mockSelect && (
-                    <SelectContent>
-                      {mockSelect.length > 0 &&
-                        mockSelect.map((option) => (
-                          <SelectItem key={option.key} value={option.key}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                    </SelectContent>
+        <Card>
+          <CardHeader>
+            <CardTitle></CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="mb-2 grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div>
+                <FormField
+                  control={form.control}
+                  name="typeOfInfection"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Loại nhiễm</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Chọn loại nhiễm" />
+                          </SelectTrigger>
+                        </FormControl>
+                        {mockSelect && (
+                          <SelectContent>
+                            {mockSelect.length > 0 &&
+                              mockSelect.map((option) => (
+                                <SelectItem key={option.key} value={option.key}>
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                          </SelectContent>
+                        )}
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
                   )}
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="manufacture"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Sản xuất</FormLabel>
-                <FormControl>
-                  <Input placeholder="Sản xuất" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <FormField
-          control={form.control}
-          name="note"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Ghi chú</FormLabel>
-              <FormControl>
-                <Textarea placeholder="Ghi chú" className="resize-none" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="barCode"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>BarCode</FormLabel>
-              <FormControl>
-                <Textarea {...field} disabledOpacity={false} disabled placeholder="BarCode" className="resize-none" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                />
+              </div>
+              <div>
+                <FormField
+                  control={form.control}
+                  name="manufacture"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Sản xuất</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Sản xuất" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            <div className="mb-8 grid grid-cols-1 gap-4">
+              <FormField
+                control={form.control}
+                name="note"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Ghi chú</FormLabel>
+                    <FormControl>
+                      <Textarea placeholder="Ghi chú" className="resize-none" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="barCode"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>BarCode</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        disabledOpacity={false}
+                        disabled
+                        placeholder="BarCode"
+                        className="resize-none"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </CardContent>
+        </Card>
+
         <Button type="submit">Tạo</Button>
       </form>
     </Form>

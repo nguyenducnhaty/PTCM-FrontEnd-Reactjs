@@ -20,8 +20,6 @@ const Customizer = () => {
   const [mounted, setMounted] = useState(false);
   const { setTheme: setMode, resolvedTheme: mode } = useTheme();
   const themeContext = useContext(ThemeColorContext);
-  console.log(themeContext);
-  console.log(mode);
 
   useEffect(() => {
     setMounted(true);

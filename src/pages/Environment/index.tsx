@@ -6,17 +6,17 @@ import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 
-import { DataTable } from './components/DataTable';
 import { DialogEnvironmentForm } from './components/DialogEnvironmentForm';
-import { DataTableColumnHeader } from './components/DataTableColumnHeader';
 import { DataTableRowActions } from './components/DataTableRowActions';
 
 import { labels, priorities, statuses } from './data/data';
 import { Task } from './data/schema';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { DataTable } from '@/components/Table/DataTable';
+import { DataTableColumnHeader } from '@/components/Table/DataTableColumnHeader';
 
 const Environment = () => {
-  const [isAddTaskDialogOpen, setAddTaskDialogOpen] = useState(false); // Renamed open to isAddTaskDialogOpen
+  const [isAddTaskDialogOpen, setAddTaskDialogOpen] = useState(false);
   const tasks = [
     {
       id: 'TASK-8782',
@@ -143,6 +143,17 @@ const Environment = () => {
     setAddTaskDialogOpen(true);
   };
 
+  const facetedFilters = [
+    {
+      field: 'status',
+      options: statuses,
+    },
+    {
+      field: 'priority',
+      options: priorities,
+    },
+  ];
+
   return (
     <>
       <div className="flex flex-col gap-2 space-y-6 p-4 pt-4">
@@ -159,7 +170,7 @@ const Environment = () => {
             <CardTitle></CardTitle>
           </CardHeader>
           <CardContent>
-            <DataTable data={tasks} columns={columns} />
+            <DataTable data={tasks} columns={columns} fieldInputFilter={'title'} facetedFilters={facetedFilters} />
           </CardContent>
         </Card>
       </div>

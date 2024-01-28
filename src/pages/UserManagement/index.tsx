@@ -6,24 +6,12 @@ import { Separator } from '@/components/ui/separator';
 import { Checkbox } from '@/components/ui/checkbox';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { DataTableColumnHeader } from '../Environment/components/DataTableColumnHeader';
+
 import { DialogEnvironmentForm } from '../Environment/components/DialogEnvironmentForm';
-import { Task } from '../Environment/data/schema';
 import { DataTable } from '@/components/Table/DataTable';
 import { statuses } from '@/constants';
-
-type User = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  role: string;
-  implantationGroup: string;
-  phone: string;
-  email: string;
-  status: 'Active' | 'Inactive'; // Chỉ cho phép 'Active' hoặc 'Inactive'
-  gender: 'Male' | 'Female'; // Chỉ cho phép 'Male' hoặc 'Female'
-};
+import { DataTableColumnHeader } from '@/components/Table/DataTableColumnHeader';
+import { User } from './schema';
 
 const UserManagement = () => {
   const [isAddTaskDialogOpen, setAddTaskDialogOpen] = useState(false);
@@ -176,9 +164,6 @@ const UserManagement = () => {
     // },
   ];
 
-  const openAddTaskDialog = () => {
-    setAddTaskDialogOpen(true);
-  };
   const facetedFilters = [
     {
       field: 'status',
@@ -194,7 +179,6 @@ const UserManagement = () => {
             <h3 className="text-lg font-medium">Quản lí nhân viên</h3>
             <p className="text-sm text-muted-foreground">Quản lí nhân viên sẽ được lưu trữ tại đây</p>
           </div>
-          <Button onClick={openAddTaskDialog}>Add</Button>
         </div>
         <Separator />
         <Card>
@@ -206,7 +190,6 @@ const UserManagement = () => {
           </CardContent>
         </Card>
       </div>
-      <DialogEnvironmentForm open={isAddTaskDialogOpen} setOpen={setAddTaskDialogOpen} />
     </>
   );
 };

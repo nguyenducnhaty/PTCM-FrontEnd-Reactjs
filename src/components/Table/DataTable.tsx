@@ -16,11 +16,13 @@ import {
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { DataTablePagination } from '@/components/Table/DataTablePagination';
-import { DataTableToolbar } from './DataTableToolbar';
+import { DataTableToolbar, FacetedFilter } from './DataTableToolbar';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  fieldInputFilter: string;
+  facetedFilters: FacetedFilter[];
 }
 
 export function DataTable<TData, TValue>({

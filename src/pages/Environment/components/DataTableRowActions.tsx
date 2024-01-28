@@ -12,8 +12,6 @@ import {
 import DrawerEnvironmentTable from './DrawerEnvironmentTable';
 import { DialogEnvironmentForm } from './DialogEnvironmentForm';
 
-import { taskSchema } from '../data/schema';
-
 interface Invoice {
   invoice: string;
   paymentStatus: string;
@@ -29,11 +27,8 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
   const [openTable, setOpenTable] = useState(false);
   const [openForm, setOpenForm] = useState(false);
 
-  const task = taskSchema.parse(row.original);
-
   const invoices: Invoice[] = [
     { invoice: 'INV001', paymentStatus: 'Paid', totalAmount: '$250.00', paymentMethod: 'Credit Card' },
-    // ... (remaining invoice objects)
   ];
 
   const openDialogForm = () => {

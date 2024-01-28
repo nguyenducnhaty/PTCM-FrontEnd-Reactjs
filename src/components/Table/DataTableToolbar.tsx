@@ -4,31 +4,43 @@ import { Table } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { DataTableViewOptions } from './DataTableViewOptions';
-import { priorities, statuses } from '../data/data';
+// import { priorities, statuses } from '../../pages/Environment/data/data';
 import { DataTableFacetedFilter } from './DataTableFacetedFilter';
+import { statuses } from '@/constants';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
 }
 
-export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
+export function DataTableToolbar<TData>({ table, fieldInputFilter, facetedFilters }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
-
+  console.log('field', facetedFilters[0].field);
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
           placeholder="Filter tasks..."
-          value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
-          onChange={(event) => table.getColumn('title')?.setFilterValue(event.target.value)}
+          value={(table.getColumn(fieldInputFilter)?.getFilterValue() as string) ?? ''}
+          onChange={(event) => table.getColumn(fieldInputFilter)?.setFilterValue(event.target.value)}
           className="h-8 w-[150px] lg:w-[250px]"
         />
         {table.getColumn('status') && (
           <DataTableFacetedFilter column={table.getColumn('status')} title="Status" options={statuses} />
         )}
-        {table.getColumn('priority') && (
+        {/* {table.getColumn('priority') && (
           <DataTableFacetedFilter column={table.getColumn('priority')} title="Priority" options={priorities} />
-        )}
+        )} */}
+        {facetedFilters.map((index, facetedFilter) => {
+          true && (
+            <DataTableFacetedFilter
+              key={index}
+              column={table.getColumn(facetedFilter.field)}
+              title={facetedFilter.field}
+              options={facetedFilter.options}
+            />
+          );
+        })}
+
         {isFiltered && (
           <Button variant="ghost" onClick={() => table.resetColumnFilters()} className="h-8 px-2 lg:px-3">
             Reset

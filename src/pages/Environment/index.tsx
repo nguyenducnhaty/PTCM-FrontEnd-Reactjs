@@ -13,7 +13,7 @@ import { DataTableRowActions } from './components/DataTableRowActions';
 
 import { labels, priorities, statuses } from './data/data';
 import { Task } from './data/schema';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Environment = () => {
   const [isAddTaskDialogOpen, setAddTaskDialogOpen] = useState(false); // Renamed open to isAddTaskDialogOpen

@@ -7,4 +7,6 @@ export const ROUTES = {
   SCAN_FOR_INFECTED_SAMPLES: '/scan-for-infected-samples',
   ENVIRONMENT: '/environment',
   BRIGHT_ROOM: '/bright-room',
+  USER: '/user',
+  USER_MANAGEMENT: '/user-management',
 };

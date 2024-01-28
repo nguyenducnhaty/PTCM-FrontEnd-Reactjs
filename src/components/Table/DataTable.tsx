@@ -15,15 +15,20 @@ import {
 } from '@tanstack/react-table';
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { DataTableToolbar } from '../../../components/Table/DataTableToolbar';
 import { DataTablePagination } from '@/components/Table/DataTablePagination';
+import { DataTableToolbar } from './DataTableToolbar';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({ columns, data, fieldInputFilter }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({
+  columns,
+  data,
+  fieldInputFilter,
+  facetedFilters,
+}: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
@@ -53,7 +58,7 @@ export function DataTable<TData, TValue>({ columns, data, fieldInputFilter }: Da
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} fieldInputFilter={fieldInputFilter} />
+      <DataTableToolbar table={table} fieldInputFilter={fieldInputFilter} facetedFilters={facetedFilters} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>

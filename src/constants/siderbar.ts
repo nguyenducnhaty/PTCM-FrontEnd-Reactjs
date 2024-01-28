@@ -1,4 +1,4 @@
-import { AlertCircle, Archive, ArchiveX, File, LampCeiling, LucideIcon, PenBox, Send } from 'lucide-react';
+import { AlertCircle, Archive, ArchiveX, File, LampCeiling, LucideIcon, PenBox, Send, Users } from 'lucide-react';
 import { ROUTES } from '.';
 
 type Link = {
@@ -57,6 +57,13 @@ export const sidebarNavItems: Link[] = [
     href: ROUTES.BRIGHT_ROOM,
     label: '',
     icon: LampCeiling,
+    variant: 'ghost',
+  },
+  {
+    title: 'Quản lý người dung',
+    href: ROUTES.USER_MANAGEMENT,
+    label: '',
+    icon: Users,
     variant: 'ghost',
   },
 ];

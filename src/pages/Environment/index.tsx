@@ -3,52 +3,109 @@ import { ColumnDef } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 
 import { DialogEnvironmentForm } from './components/DialogEnvironmentForm';
 import { DataTableRowActions } from './components/DataTableRowActions';
 
-import { labels, priorities, statuses } from './data/data';
-import { Task } from './data/schema';
+import { EnvironmentType } from './data/schema';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DataTable } from '@/components/Table/DataTable';
 import { DataTableColumnHeader } from '@/components/Table/DataTableColumnHeader';
+import { Input } from '@/components/ui/input';
+import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from '@/components/ui/select';
 
 const Environment = () => {
   const [isAddTaskDialogOpen, setAddTaskDialogOpen] = useState(false);
-  const tasks = [
+
+  const environments = [
     {
-      id: 'TASK-8782',
-      title: "You can't compress the program without quantifying the open-source SSD pixel!",
-      status: 'in progress',
-      label: 'documentation',
-      priority: 'medium',
+      id: 1,
+      formCode: 1,
+      phaseLabel: 'test',
+      date: '123',
+      weekKH: '1',
+      treeGroup: 'test',
+      box: '1',
+      importExport: 'test',
+      capacity: '1',
+      bagCode: 1,
+      tChild: '1',
+      bagBox: '1',
+      environmentRoom: 1,
+      environmentalShelves: 1,
+      nvPour: '1',
+      minute: '1',
+      staff: '1',
+      dateAdded: '1',
+      note: '1',
     },
     {
-      id: 'TASK-7878',
-      title: 'Try to calculate the EXE feed, maybe it will index the multi-byte pixel!',
-      status: 'backlog',
-      label: 'documentation',
-      priority: 'medium',
+      id: 2,
+      formCode: 2,
+      phaseLabel: 'production',
+      date: '456',
+      weekKH: '2',
+      treeGroup: 'production_group',
+      box: '2',
+      importExport: 'production_export',
+      capacity: '2',
+      bagCode: 2,
+      tChild: '2',
+      bagBox: '2',
+      environmentRoom: 2,
+      environmentalShelves: 2,
+      nvPour: '2',
+      minute: '2',
+      staff: '2',
+      dateAdded: '2',
+      note: '2',
     },
     {
-      id: 'TASK-7839',
-      title: 'We need to bypass the neural TCP card!',
-      status: 'todo',
-      label: 'bug',
-      priority: 'high',
+      id: 3,
+      formCode: 3,
+      phaseLabel: 'development',
+      date: '789',
+      weekKH: '3',
+      treeGroup: 'development_group',
+      box: '3',
+      importExport: 'development_export',
+      capacity: '3',
+      bagCode: 3,
+      tChild: '3',
+      bagBox: '3',
+      environmentRoom: 3,
+      environmentalShelves: 3,
+      nvPour: '3',
+      minute: '3',
+      staff: '3',
+      dateAdded: '3',
+      note: '3',
     },
     {
-      id: 'TASK-5562',
-      title: 'The SAS interface is down, bypass the open-source pixel so we can back up the PNG bandwidth!',
-      status: 'backlog',
-      label: 'feature',
-      priority: 'medium',
+      id: 4,
+      formCode: 4,
+      phaseLabel: 'maintenance',
+      date: '101112',
+      weekKH: '4',
+      treeGroup: 'maintenance_group',
+      box: '4',
+      importExport: 'maintenance_export',
+      capacity: '4',
+      bagCode: 4,
+      tChild: '4',
+      bagBox: '4',
+      environmentRoom: 4,
+      environmentalShelves: 4,
+      nvPour: '4',
+      minute: '4',
+      staff: '4',
+      dateAdded: '4',
+      note: '4',
     },
   ];
 
-  const columns: ColumnDef<Task>[] = [
+  const columns: ColumnDef<EnvironmentType>[] = [
     {
       id: 'select',
       header: ({ table }) => (
@@ -78,61 +135,193 @@ const Environment = () => {
       enableHiding: false,
     },
     {
-      accessorKey: 'title',
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Title" />,
+      accessorKey: 'phaseLabel',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Mã phiếu" />,
       cell: ({ row }) => {
-        const label = labels.find((label) => label.value === row.original.label);
-
         return (
           <div className="flex space-x-2">
-            {label && <Badge variant="outline">{label.label}</Badge>}
-            <span className="max-w-[500px] truncate font-medium">{row.getValue('title')}</span>
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('phaseLabel')}</span>
           </div>
         );
       },
     },
     {
-      accessorKey: 'status',
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
+      accessorKey: 'date',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Ngày" />,
       cell: ({ row }) => {
-        const status = statuses.find((status) => status.value === row.getValue('status'));
-
-        if (!status) {
-          return null;
-        }
-
         return (
-          <div className="flex w-[100px] items-center">
-            {status.icon && <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />}
-            <span>{status.label}</span>
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('date')}</span>
           </div>
         );
-      },
-      filterFn: (row, id, value) => {
-        return value.includes(row.getValue(id));
       },
     },
     {
-      accessorKey: 'priority',
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Priority" />,
+      accessorKey: 'weekKH',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Tuần KH" />,
       cell: ({ row }) => {
-        const priority = priorities.find((priority) => priority.value === row.getValue('priority'));
-
-        if (!priority) {
-          return null;
-        }
-
         return (
-          <div className="flex items-center">
-            {priority.icon && <priority.icon className="mr-2 h-4 w-4 text-muted-foreground" />}
-            <span>{priority.label}</span>
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('weekKH')}</span>
           </div>
         );
       },
-      filterFn: (row, id, value) => {
-        return value.includes(row.getValue(id));
+    },
+    {
+      accessorKey: 'treeGroup',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Nhóm cây" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('treeGroup')}</span>
+          </div>
+        );
       },
     },
+    {
+      accessorKey: 'box',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Box" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('box')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'importExport',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Nhập xuất" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('importExport')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'capacity',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Dung tích (Lít)" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('capacity')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'bagCode',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Mã túi" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('bagCode')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'tChild',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="T.Con" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('tChild')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'bagBox',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Thùng túi" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('bagBox')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'environmentRoom',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Phòng MT" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('environmentRoom')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'environmentalShelves',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Kệ MT" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('environmentalShelves')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'nvPour',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="NV Đổ" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('nvPour')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'minute',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Thời gian (Phút)" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('minute')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'staff',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Nhân viên" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('staff')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'dateAdded',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Ngày nhập" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('dateAdded')}</span>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'note',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Ghi chú" />,
+      cell: ({ row }) => {
+        return (
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate font-medium">{row.getValue('note')}</span>
+          </div>
+        );
+      },
+    },
+
     {
       id: 'actions',
       cell: ({ row }) => <DataTableRowActions row={row} />,
@@ -142,17 +331,6 @@ const Environment = () => {
   const openAddTaskDialog = () => {
     setAddTaskDialogOpen(true);
   };
-
-  const facetedFilters = [
-    {
-      field: 'status',
-      options: statuses,
-    },
-    {
-      field: 'priority',
-      options: priorities,
-    },
-  ];
 
   return (
     <>
@@ -170,7 +348,151 @@ const Environment = () => {
             <CardTitle></CardTitle>
           </CardHeader>
           <CardContent>
-            <DataTable data={tasks} columns={columns} fieldInputFilter={'title'} facetedFilters={facetedFilters} />
+            <div className="mx-auto my-6 rounded-md bg-white p-6 shadow">
+              <form>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="date">
+                      Ngày
+                    </label>
+                    <Input id="date" placeholder="dd/mm/yyyy" type="text" />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="nhanPha">
+                      Nhãn Pha
+                    </label>
+                    <Input id="nhanPha" type="text" />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="nhomCay">
+                      Nhóm Cây
+                    </label>
+                    <Input id="nhomCay" type="text" />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="box">
+                      Box
+                    </label>
+                    <Select>
+                      <SelectTrigger id="box">
+                        <SelectValue placeholder="Chọn" />
+                      </SelectTrigger>
+                      <SelectContent position="popper">
+                        <SelectItem value="option1">Option 1</SelectItem>
+                        <SelectItem value="option2">Option 2</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="nhapXuat">
+                      Nhập Xuất
+                    </label>
+                    <Select>
+                      <SelectTrigger id="nhapXuat">
+                        <SelectValue placeholder="Chọn" />
+                      </SelectTrigger>
+                      <SelectContent position="popper">
+                        <SelectItem value="nhap">Nhập</SelectItem>
+                        <SelectItem value="xuat">Xuất</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="nvDo">
+                      Nv Độ
+                    </label>
+                    <Input id="nvDo" type="text" />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="dungTich">
+                      Dung Tích (Lit)
+                    </label>
+                    <Input id="dungTich" placeholder="0,0" type="text" />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="tCon">
+                      T.Con
+                    </label>
+                    <Input id="tCon" placeholder="0" type="text" />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="maTui">
+                      Mã Túi
+                    </label>
+                    <Select>
+                      <SelectTrigger id="maTui">
+                        <SelectValue placeholder="Chọn" />
+                      </SelectTrigger>
+                      <SelectContent position="popper">
+                        <SelectItem value="tui1">Túi 1</SelectItem>
+                        <SelectItem value="tui2">Túi 2</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="tGian">
+                      TGian (phút)
+                    </label>
+                    <Input id="tGian" type="text" />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="phongMT">
+                      Phòng MT
+                    </label>
+                    <Select>
+                      <SelectTrigger id="phongMT">
+                        <SelectValue placeholder="Chọn" />
+                      </SelectTrigger>
+                      <SelectContent position="popper">
+                        <SelectItem value="phong1">Phòng 1</SelectItem>
+                        <SelectItem value="phong2">Phòng 2</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="keMT">
+                      Kệ MT
+                    </label>
+                    <Select>
+                      <SelectTrigger id="keMT">
+                        <SelectValue placeholder="Chọn" />
+                      </SelectTrigger>
+                      <SelectContent position="popper">
+                        <SelectItem value="ke1">Kệ 1</SelectItem>
+                        <SelectItem value="ke2">Kệ 2</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="maPhieu">
+                      Mã Phiếu
+                    </label>
+                    <Input id="maPhieu" type="text" />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="tuanKH">
+                      Tuần KH
+                    </label>
+                    <Input id="tuanKH" type="text" />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="thungTui">
+                      Thùng Túi
+                    </label>
+                    <Input id="thungTui" type="text" />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="mb-2 font-medium" htmlFor="ghiChu">
+                      Ghi Chú
+                    </label>
+                    <Input id="ghiChu" type="text" />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </CardContent>
+          <CardContent>
+            <DataTable data={environments} columns={columns} fieldInputFilter={'phaseLabel'} />
           </CardContent>
         </Card>
       </div>

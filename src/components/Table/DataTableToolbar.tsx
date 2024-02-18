@@ -9,7 +9,7 @@ import { DataTableFacetedFilter } from './DataTableFacetedFilter';
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
   fieldInputFilter: string;
-  facetedFilters: FacetedFilter[];
+  facetedFilters?: FacetedFilter[];
 }
 export interface FacetedFilter {
   field: string;
@@ -28,7 +28,7 @@ export function DataTableToolbar<TData>({ table, fieldInputFilter, facetedFilter
           onChange={(event) => table.getColumn(fieldInputFilter)?.setFilterValue(event.target.value)}
           className="h-8 w-[150px] lg:w-[250px]"
         />
-        {facetedFilters.map(
+        {facetedFilters?.map(
           (facetedFilter, index) =>
             table.getColumn(facetedFilter.field) && (
               <DataTableFacetedFilter

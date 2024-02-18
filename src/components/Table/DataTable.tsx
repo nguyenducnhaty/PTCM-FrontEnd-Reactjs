@@ -22,7 +22,7 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   fieldInputFilter: string;
-  facetedFilters: FacetedFilter[];
+  facetedFilters?: FacetedFilter[];
 }
 
 export function DataTable<TData, TValue>({
